@@ -5,6 +5,7 @@ import random
 farby = ["purple", "red", "green", "blue", "brown", "yellow"]
 
 kor = turtle.Turtle()
+kor.pensize(5)
 
 def vykresli(dlzka: int, stran: int):
     uhol = 360 / stran
@@ -24,8 +25,6 @@ def vykresli(dlzka: int, stran: int):
 
 
 def prerusovana_ciara(pocet: int, dlzka: int):
-    kor.pensize(5)
-
     for _ in range(pocet):
         if kor.xcor() + 2 * dlzka > 500:
             break
@@ -35,9 +34,54 @@ def prerusovana_ciara(pocet: int, dlzka: int):
         kor.forward(dlzka)
         kor.pendown()
 
-def 
+def spirala(pocet: int, dlzka: int, stupen: int = 30):
+    for _ in range(pocet):
+        kor.forward(dlzka)
+        kor.left(stupen)
+        dlzka += 20
 
 
-prerusovana_ciara(5, 20)
+def rekurzivna_spirala(pocet: int, dlzka: int, stupen: int = 30):
+    if pocet == 0:
+        return
+
+    kor.forward(dlzka)
+    kor.left(stupen)
+    rekurzivna_spirala(pocet - 1, dlzka + 20, stupen)
+
+
+def urob_list(dlzka: int):
+    kor.pencolor("green")
+    kor.dot(dlzka)
+    kor.pencolor("black")
+
+
+
+def binarny_strom(dlzka: int):
+    if dlzka < 25:
+        urob_list(dlzka)
+        return
+
+    kor.forward(dlzka)
+    kor.left(60)
+    binarny_strom(random.randrange(dlzka // 2, dlzka // 3 * 2))
+    kor.right(120)
+    binarny_strom(random.randrange(dlzka // 2, dlzka // 3 * 2))
+
+    kor.left(60)
+    kor.backward(dlzka)
+
+
+def nachystaj_sa():
+    kor.left(90)
+    kor.penup()
+    kor.backward(500)
+    kor.pendown()
+    kor.speed(0)
+
+
+nachystaj_sa()
+binarny_strom(500)
+
 
 turtle.done()
