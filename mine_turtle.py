@@ -72,7 +72,7 @@ def binarny_strom(dlzka: int):
     kor.backward(dlzka)
 
 
-def nachystaj_sa():
+def nachystaj_sa_dole():
     kor.left(90)
     kor.penup()
     kor.backward(500)
@@ -80,8 +80,31 @@ def nachystaj_sa():
     kor.speed(0)
 
 
-nachystaj_sa()
-binarny_strom(500)
+def nachystaj_sa_dolava():
+    kor.penup()
+    kor.backward(600)
+    kor.pendown()
+
+
+def kochova_vlocka(pocet: int, dlzka):
+    kor.pencolor("lightblue")
+    kor.pensize(3)
+
+    if pocet == 0:
+        kor.forward(dlzka)
+        return
+
+    kochova_vlocka(pocet - 1, dlzka / 3)
+    kor.left(60)
+    kochova_vlocka(pocet - 1, dlzka / 3)
+    kor.right(120)
+    kochova_vlocka(pocet - 1, dlzka / 3)
+    kor.left(60)
+    kochova_vlocka(pocet - 1, dlzka / 3)
+
+
+nachystaj_sa_dolava()
+kochova_vlocka(5, 1500)
 
 
 turtle.done()
